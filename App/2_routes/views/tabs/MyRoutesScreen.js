@@ -1,30 +1,62 @@
 'use strict'
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-export default class MyRoutesScreen extends React.Component {
+import { FlatList,RefreshControl } from 'react-native'
+import { Container, Header, Content, Card, CardItem, Body, Text,CheckBox,ListItem, List } from 'native-base';
+import {checkData} from '../../../AllData'
+import { connect } from 'react-redux'
+class MyRoutesScreen extends React.Component {
+    constructor(props){
+        super(props);
+        this.state={
+            refreshing: false,
+        }
+        this.getData = this.getData.bind(this);
+    }
     static navigationOptions = {
         title:'My Routes'
+    };
+    getData(){
+        this.setState({refreshing: true});
+        checkData();
+        this.setState({refreshing: false});
     }
-  render(){
-    return(
-      <View style={{
-        flex:1,
-        backgroundColor:'brown',
-        alignItems:'center',
-        justifyContent:'center'
-      }}>
-        <Text>{ 'Tab Three Screen Three' }</Text>
-        <TouchableOpacity
-          style={{
-            padding:20,
-            borderRadius:20,
-            backgroundColor:'yellow',
-            marginTop:20
-          }}>
-          <Text>{'Go back a screen this tab'}</Text>
-        </TouchableOpacity>
-
-      </View>
-    )
-  }
+    componentDidMount(){
+        this.getData();
+    }
+    render(){
+        return(
+            <Content style={{flex:1}}
+                     refreshControl={
+                         <RefreshControl
+                             refreshing={this.state.refreshing}
+                             onRefresh={this.getData}
+                         />
+                     }
+            >
+                <FlatList
+                    data={this.props.allData.routes.filter((value)=>{
+                        return value.userId == this.props.userData.id})}
+                    keyExtractor={(x,i)=>i}
+                    renderItem={({ item }) => (
+                        <List>
+                            <ListItem
+                                delayLongPress={1000}
+                                onPress={() => this.props.navigation.navigate('OneRoute',{data:item})
+                                }
+                            >
+                                <Text>{item.name}</Text>
+                            </ListItem>
+                        </List>
+                    )}
+                />
+            </Content>
+        )
+    }
 }
+const mapStateToProps = (state) => {
+    return {
+        allData: state.allData,
+        userData: state.userData
+    }
+}
+export default connect(mapStateToProps)(MyRoutesScreen)

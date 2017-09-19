@@ -6,13 +6,12 @@ import { StackNavigator  } from 'react-navigation'
 import DrawerBarNavigation from './0_drawerBar/views/DrawerBarNavigation'
 import AuthAndRegNavigation from './authAndReg/view/AuthAndRegNavigation'
 const routeConfiguration = {
-    AuthAndRegNavigation: { screen: AuthAndRegNavigation },
     DrawerBarNavigation: { screen: DrawerBarNavigation },
+    AuthAndRegNavigation: { screen: AuthAndRegNavigation },
 };
 export const NavigatorMain = StackNavigator(
     routeConfiguration,
     {
-        headerMode:'none',
-        initialRouteName:"DrawerBarNavigation"
+        headerMode:'none'
     }
 );

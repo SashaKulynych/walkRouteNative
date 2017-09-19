@@ -8,7 +8,9 @@ const StackConfig ={
     TabNavigation: {
         screen:RoutesTabsNavigation
     },
-    OneRoute:{screen:OneRoute},
+    OneRoute:{
+        screen:OneRoute
+    },
 }
 
-export const NavigatorRoutes = StackNavigator(StackConfig,{initialRouteName:"TabNavigation"});
+export const NavigatorRoutes = StackNavigator(StackConfig,{   headerMode:'none',initialRouteName:"TabNavigation"});

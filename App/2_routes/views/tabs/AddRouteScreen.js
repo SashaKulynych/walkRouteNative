@@ -37,8 +37,11 @@ class AddRouteScreen extends React.Component {
     }
     categoryPicker(){
         let pickerItems=[];
-        for(let category in this.props.allData.categories){
-            let data = this.props.allData.categories[category];
+        let myCategories=this.props.allData.categories.filter((value)=>{
+            return value.userId == this.props.userData.id})
+        console.log(myCategories)
+        for(let category in myCategories){
+            let data = myCategories[category];
             pickerItems.push(<Picker.Item label={data.name} value={data.id} key={data.id} />)
         }
         return pickerItems

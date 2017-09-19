@@ -16,7 +16,7 @@ class AddCategoryScreen extends React.Component {
 
     addCategory(){
         let http = new XMLHttpRequest();
-        http.open('GET', 'http://localhost:3000/categories?name='+this.state.categoryName);
+        http.open('GET', 'http://localhost:3000/categories?name='+this.state.categoryName+'&userId='+this.props.userData.id);
         http.setRequestHeader("Content-Type", "application/json");
         http.responseType = 'json';
         http.onload = ()=> {

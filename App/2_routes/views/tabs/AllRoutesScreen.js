@@ -40,7 +40,8 @@ class AllRoutesScreen extends React.Component {
                     <List>
                         <ListItem
                             delayLongPress={1000}
-                            onPress={() => this.props.navigation.navigate('OneRoute')}
+                            onPress={() => this.props.navigation.navigate('OneRoute',{data:item})
+                            }
                         >
                             <Text>{item.name}</Text>
                         </ListItem>

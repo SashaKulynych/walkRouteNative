@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import {AppRegistry,View,FlatList,AsyncStorage,RefreshControl,Alert} from 'react-native';
+import {AppRegistry,View,FlatList,AsyncStorage,RefreshControl} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Body, Text,CheckBox,ListItem, List } from 'native-base';
 import {checkData} from '../../AllData'
 import { connect } from 'react-redux'
@@ -26,16 +26,6 @@ class AllCategoriesScreen extends React.Component {
     componentDidMount(){
         this.getData();
     }
-    deleteCategory(id){
-        let url = 'http://localhost:3000/categories/'+id;
-        fetch(url, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }}).then(this.getData()).then(alert("Category deleted!"))
-
-    }
     render(){
     return(
         <Content style={{flex:1}}
@@ -51,18 +41,7 @@ class AllCategoriesScreen extends React.Component {
                 keyExtractor={(x,i)=>i}
                 renderItem={({ item }) => (
                     <List>
-                        <ListItem delayLongPress={1000}
-                                  onLongPress ={()=>{
-                                      Alert.alert(
-                                          'Delete category '+item.name,
-                                          '',
-                                          [
-                                              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                                              {text: 'OK', onPress: () => {this.deleteCategory(item.id)}},
-                                          ],
-                                          { cancelable: false }
-                                      )
-                                  }}>
+                        <ListItem>
                             <Text>{item.name}</Text>
                         </ListItem>
                     </List>
