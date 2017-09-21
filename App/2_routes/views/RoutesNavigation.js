@@ -5,6 +5,8 @@ import React from 'react'
 import { addNavigationHelpers } from 'react-navigation'
 import { NavigatorRoutes } from '../navigationConfiguration'
 import { View } from 'react-native'
+import {Icon} from 'native-base'
+import {Toolbar} from '../../Toolbar/toolbar'
 //Redux
 import { connect } from 'react-redux'
 const mapStateToProps = (state) => {
@@ -13,18 +15,18 @@ const mapStateToProps = (state) => {
     }
 }
 class RoutesNavigation extends React.Component {
-    static navigationOptions = {
-        drawerLabel: 'Routes'
-    }
     render(){
         const { dispatch, navigationState} = this.props
         return (
-            <NavigatorRoutes
-                navigation={addNavigationHelpers({
-                    dispatch: dispatch,
-                    state: navigationState
-                })}
-            />
+            <View style={{flex:1}}>
+                {/*<Toolbar title="Categories"/>*/}
+                <NavigatorRoutes
+                    navigation={addNavigationHelpers({
+                        dispatch: dispatch,
+                        state: navigationState
+                    })}
+                />
+            </View>
         )
     }
 }

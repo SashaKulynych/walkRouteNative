@@ -5,12 +5,10 @@ import React from 'react'
 import { addNavigationHelpers } from 'react-navigation'
 import { NavigatorTabs } from './navigationConfiguration'
 import { View } from 'react-native'
-import Toolbar from './Toolbar'
-
+import {checkData} from '../../../AllData'
 //Redux
 import { connect } from 'react-redux'
-// Icon
-import Icon from 'react-native-vector-icons/FontAwesome'
+import {SkypeIndicator} from'react-native-indicators';
 
 const mapStateToProps = (state) => {
  return {
@@ -18,21 +16,33 @@ const mapStateToProps = (state) => {
   }
 }
 class RoutesTabsNavigation extends React.Component {
-
+    static navigationOptions = {
+        title:'Routes',
+    };
+    constructor(){
+        super()
+        this.state={
+            isLoaded:false
+        }
+    }
+    getData(){
+        this.setState({refreshing: true});
+        checkData();
+        this.setState({refreshing: false, isLoaded:true});
+    }
+    componentDidMount(){
+        this.getData();
+    }
 render(){
     const { dispatch, navigationState} = this.props
 return (
-    <View style={{ flex:1 }}>
-        <Toolbar />
-        <View style={{flex:1 ,marginTop:56}}>
-          <NavigatorTabs
-            navigation={addNavigationHelpers({
-              dispatch: dispatch,
-              state: navigationState
-            })}
-          />
-        </View>
-    </View>
+    this.state.isLoaded ?(
+      <NavigatorTabs
+        navigation={addNavigationHelpers({
+          dispatch: dispatch,
+          state: navigationState
+        })}
+      />):(<SkypeIndicator color='#4883da' />)
     )
   }
 }

@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
-import {AppRegistry,View,FlatList,AsyncStorage,RefreshControl,Alert} from 'react-native';
-import { Container, Header, Content, Card, CardItem, Body, Text,CheckBox,ListItem, List } from 'native-base';
+import {AppRegistry,View,FlatList,AsyncStorage,RefreshControl,Alert,TouchableWithoutFeedback  } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Body, Text,CheckBox,ListItem, List,Button } from 'native-base';
 import {checkData} from '../../AllData'
 import { connect } from 'react-redux'
 class MyCategoriesScreen extends React.Component {
@@ -10,7 +10,6 @@ class MyCategoriesScreen extends React.Component {
         this.state={
             refreshing: false,
         }
-        this.getData = this.getData.bind(this);
     }
     static navigationOptions = {
         title:'My categories'
@@ -35,11 +34,11 @@ class MyCategoriesScreen extends React.Component {
     }
     render(){
         return(
-            <Content style={{flex:1}}
+            <Content  style={{flex:1}}
                      refreshControl={
                          <RefreshControl
                              refreshing={this.state.refreshing}
-                             onRefresh={this.getData}
+                             onRefresh={()=>this.getData()}
                          />
                      }
             >
@@ -48,25 +47,26 @@ class MyCategoriesScreen extends React.Component {
                         return value.userId == this.props.userData.id})}
                     keyExtractor={(x,i)=>i}
                     renderItem={({ item }) => (
-                        <List>
-                            <ListItem delayLongPress={1000}
-                                      onLongPress ={()=>{
-                                          Alert.alert(
-                                              'Delete category '+item.name +"?",
-                                              'You delete all routes in this category!',
-                                              [
-                                                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                                                  {text: 'OK', onPress: () => {this.deleteCategory(item.id)}},
-                                              ],
-                                              { cancelable: false }
-                                          )
-                                      }}>
-                                <Text>{item.name}</Text>
-                            </ListItem>
-                        </List>
+                        <TouchableWithoutFeedback
+                            delayLongPress={1000}
+                            onLongPress ={()=>{
+                                Alert.alert(
+                                    'Delete category '+item.name +"?",
+                                    'You delete all routes in this category!',
+                                    [
+                                        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                                        {text: 'OK', onPress: () => {this.deleteCategory(item.id)}},
+                                    ],
+                                    { cancelable: false }
+                                )
+                            }}>
+                                <ListItem>
+                                    <Text>{item.name}</Text>
+                                </ListItem>
+                        </TouchableWithoutFeedback>
                     )}
                 />
-            </Content>
+            </Content >
         )
     }
 }

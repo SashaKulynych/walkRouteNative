@@ -13,7 +13,9 @@ class AddRouteScreen extends React.Component {
         this.state={
             routeName:'',
             routeLength:0,
-            routeCategory:''
+            routeCategory:'',
+            routeDescription:'',
+            categoryPicker:[]
         }
     }
     addRoute(){
@@ -26,6 +28,7 @@ class AddRouteScreen extends React.Component {
                 },
                 body: JSON.stringify({
                     "name": this.state.routeName,
+                    "description":this.state.routeDescription,
                     "length":this.state.routeLength,
                     "categoryId":this.state.routeCategory,
                     "userId": this.props.userData.id
@@ -39,7 +42,6 @@ class AddRouteScreen extends React.Component {
         let pickerItems=[];
         let myCategories=this.props.allData.categories.filter((value)=>{
             return value.userId == this.props.userData.id})
-        console.log(myCategories)
         for(let category in myCategories){
             let data = myCategories[category];
             pickerItems.push(<Picker.Item label={data.name} value={data.id} key={data.id} />)
@@ -65,6 +67,10 @@ class AddRouteScreen extends React.Component {
                     <Item>
                         <Input onChangeText={(text)=>this.setState({routeName: text})}
                                placeholder="Route name" />
+                    </Item>
+                    <Item>
+                        <Input onChangeText={(text)=>this.setState({routeDescription: text})}
+                               placeholder="Description" />
                     </Item>
                     <Button block onPress={() => this.addRoute()}>
                         <Text>Add</Text>

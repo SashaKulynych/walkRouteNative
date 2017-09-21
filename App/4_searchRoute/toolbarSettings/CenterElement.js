@@ -57,6 +57,7 @@ export default class CenterElement extends React.Component {
         if (textInput) {
             content = ( <TextInput style={{fontSize:20}} underlineColorAndroid={'transparent'} placeholder="Search"
                                    value={this.props.searchValue}
+                                   autoFocus={true}
                                    onChangeText={(searchValue)=>this.props.onSearchTextChange(searchValue)}
             /> );
         }

@@ -1,19 +1,20 @@
 'use strict'
 import React from 'react'
-import { FlatList,RefreshControl } from 'react-native'
-import { Container, Header, Content, Card, CardItem, Body, Text,CheckBox,ListItem, List } from 'native-base';
+import { FlatList,RefreshControl,View } from 'react-native'
+import { Container, Header, Content, Card, CardItem, Body, Text,CheckBox,ListItem, List,Icon } from 'native-base';
 import {checkData} from '../../AllData'
+import {Toolbar} from '../../Toolbar/toolbar'
 import { connect } from 'react-redux'
+import store from '../../store'
 class FavoritesScreen extends React.Component {
     constructor(props){
         super(props);
         this.state={
             refreshing: false,
         }
-        this.getData = this.getData.bind(this);
     }
     static navigationOptions = {
-        title:'Favorite Routes'
+        title:'Favorites',
     };
     getData(){
         this.setState({refreshing: true});
@@ -25,31 +26,35 @@ class FavoritesScreen extends React.Component {
     }
     render(){
         return(
-            <Content style={{flex:1}}
+            <View style={{flex:1}}>
+                {/*<Toolbar title="Favorite" type="draw"/>*/}
+                <Content
                      refreshControl={
                          <RefreshControl
                              refreshing={this.state.refreshing}
-                             onRefresh={this.getData}
+                             onRefresh={()=>this.getData()}
                          />
                      }
-            >
-                <FlatList
-                    data={this.props.allData.favorites.filter((value)=>{
-                        return value.userId == this.props.userData.id})}
-                    keyExtractor={(x,i)=>i}
-                    renderItem={({ item }) => (
-                        <List>
-                            <ListItem
-                                delayLongPress={1000}
-                                onPress={() => this.props.navigation.navigate('OneRoute',{data:item})
-                                }
-                            >
-                                <Text>{item.name}</Text>
-                            </ListItem>
-                        </List>
-                    )}
-                />
-            </Content>
+                >
+                    <FlatList
+                        data={this.props.allData.favorites}
+                        keyExtractor={(x,i)=>i}
+                        renderItem={({ item }) => (
+                            <List>
+                                <ListItem
+                                    delayLongPress={1000}
+                                    onPress={() => this.props.navigation.navigate('OneFavoriteRoute',{data:this.props.allData.routes.filter((value)=>{
+                                        return value.id == item.routeId})[0]})
+                                    }
+                                >
+                                    <Text>Name: {this.props.allData.routes.filter((value)=>{
+                                        return value.id == item.routeId})[0].name}</Text>
+                                </ListItem>
+                            </List>
+                        )}
+                    />
+                </Content>
+            </View>
         )
     }
 }

@@ -20,9 +20,6 @@ class MyRoutesScreen extends React.Component {
         checkData();
         this.setState({refreshing: false});
     }
-    componentDidMount(){
-        this.getData();
-    }
     render(){
         return(
             <Content style={{flex:1}}
@@ -41,7 +38,7 @@ class MyRoutesScreen extends React.Component {
                         <List>
                             <ListItem
                                 delayLongPress={1000}
-                                onPress={() => this.props.navigation.navigate('OneRoute',{data:item})
+                                onPress={() => this.props.navigation.navigate('AllOneRoute',{data:item})
                                 }
                             >
                                 <Text>{item.name}</Text>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Form, Item, Input, Label,Button,Text } from 'native-base';
+import { Container, Header, Content, Form, Item, Input, Label,Button,Text } from 'native-base'
 class Registration extends Component {
     static navigationOptions = {
         title:'Registration'
@@ -47,24 +47,29 @@ class Registration extends Component {
     }
     render() {
         return (
-            <Container>
-                <Content>
-                    <Form>
-                        <Item>
-                            <Input keyboardType="email-address" placeholder="E-mail"
-                                   onChangeText={(text)=> this.setState({email: text})} placeHolder/>
-                        </Item>
-                        <Item last>
-                            <Input placeholder="Password"
-                                   onChangeText={(text)=>this.setState({password: text})}/>
-                        </Item>
-                    </Form>
-                    <Container>
-                        <Button block onPress={() => this.AddUser()}>
-                            <Text>Registration</Text>
-                        </Button>
-                    </Container>
-                </Content>
+            <Container
+                style={{
+                    flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                }}
+            >
+                <Form>
+                    <Item>
+                        <Input keyboardType="email-address" placeholder="E-mail"
+                               onChangeText={(text)=> this.setState({email: text})} placeHolder/>
+                    </Item>
+                    <Item last>
+                        <Input placeholder="Password"
+                               onChangeText={(text)=>this.setState({password: text})}/>
+                    </Item>
+                </Form>
+                <Button style={{margin:15}}  block onPress={() => this.AddUser()}>
+                    <Text>Registration</Text>
+                </Button>
+                <Button style={{margin:15}}  block onPress={() =>  this.props.handleRoute("LogInFail")}>
+                    <Text>Back to Authorization</Text>
+                </Button>
             </Container>
         );
     }

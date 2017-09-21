@@ -1,33 +1,32 @@
 'use strict'
-
 // React
 import React from 'react'
-
 // Navigation
 import { addNavigationHelpers } from 'react-navigation'
-import { TabBar } from '../Navigation'
-
+import { SearchNavigator } from './navigationConfiguration'
 //Redux
 import { connect } from 'react-redux'
+// Icon
+import {Icon} from 'native-base'
 
 const mapStateToProps = (state) => {
     return {
-        navigationState: state.tabBar,
+        navigationState: state.search
     }
 }
-
-class AuthAndRegNavigation extends React.Component {
+class SearchNavigation extends React.Component {
     static navigationOptions = {
-        title: 'AuthAndRegNavigation',
+        drawerLabel: 'Search',
+        drawerIcon: <Icon name="md-search"/>
     }
     render(){
-        const { dispatch, navigationState } = this.props
+        const { dispatch, navigationState} = this.props;
         return (
-            <TabBar
+            <SearchNavigator
                 navigation={
                     addNavigationHelpers({
                         dispatch: dispatch,
-                        state: navigationState,
+                        state: navigationState
                     })
                 }
             />
@@ -35,4 +34,4 @@ class AuthAndRegNavigation extends React.Component {
     }
 }
 
-export default connect(mapStateToProps)(AuthAndRegNavigation)
+export default connect(mapStateToProps)(SearchNavigation)

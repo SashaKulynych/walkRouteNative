@@ -8,9 +8,8 @@ class AllRoutesScreen extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            refreshing: false,
+            refreshing: false
         }
-        this.getData = this.getData.bind(this);
     }
     static navigationOptions = {
         title:'All Routes'
@@ -18,20 +17,17 @@ class AllRoutesScreen extends React.Component {
     getData(){
         this.setState({refreshing: true});
         checkData();
-        this.setState({refreshing: false});
-    }
-    componentDidMount(){
-        this.getData();
+        this.setState({refreshing: false, isLoaded:true});
     }
   render(){
     return(
         <Content style={{flex:1}}
-                 refreshControl={
-                     <RefreshControl
-                         refreshing={this.state.refreshing}
-                         onRefresh={this.getData}
-                     />
-                 }
+             refreshControl={
+                 <RefreshControl
+                     refreshing={this.state.refreshing}
+                     onRefresh={()=>this.getData()}
+                 />
+             }
         >
             <FlatList
                 data={this.props.state.allData.routes}
@@ -40,7 +36,7 @@ class AllRoutesScreen extends React.Component {
                     <List>
                         <ListItem
                             delayLongPress={1000}
-                            onPress={() => this.props.navigation.navigate('OneRoute',{data:item})
+                            onPress={() => this.props.navigation.navigate('AllOneRoute',{data:item})
                             }
                         >
                             <Text>{item.name}</Text>

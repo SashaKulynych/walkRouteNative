@@ -40,27 +40,50 @@
   ],
   "routes": [
     {
-      "name": "vv. ",
-      "length": "5888",
-      "categoryId": 1,
-      "userId": 2,
+      "name": "fxxcg",
+      "description": "fcfgg",
+      "length": "8888",
+      "categoryId": 2,
+      "userId": 1,
       "id": 1
     },
     {
-      "name": "cxxfg",
-      "length": "54556",
-      "categoryId": 3,
-      "userId": 2,
+      "name": "fxcg",
+      "description": "xcvvvv",
+      "length": "1588",
+      "categoryId": 1,
+      "userId": 1,
       "id": 2
     },
     {
-      "name": "vxdf",
-      "length": "588",
-      "categoryId": 1,
+      "name": "cccg",
+      "description": "ccvg",
+      "length": "558",
+      "categoryId": 2,
       "userId": 1,
       "id": 3
     }
   ],
-  "comments": [],
-  "favorites": []
+  "comments": [
+    {
+      "description": "cool",
+      "rating": 2.5,
+      "userId": 1,
+      "routeId": 1,
+      "id": 1
+    }
+  ],
+  "favorites": [
+    {
+      "userId": 1,
+      "routeId": 2,
+      "id": 2
+    },
+    {
+      "rating": 2.5,
+      "userId": 1,
+      "routeId": 1,
+      "id": 3
+    }
+  ]
 }

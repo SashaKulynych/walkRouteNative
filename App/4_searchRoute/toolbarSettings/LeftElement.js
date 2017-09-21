@@ -1,7 +1,7 @@
 import React from 'react'
 import {Animated,Easing,Platform} from 'react-native'
 import {Icon,View} from 'native-base'
-import store from '../../../../store'
+import store from '../../store'
 export default class LeftElement extends React.Component {
     constructor(props, context) {
         super(props, context);

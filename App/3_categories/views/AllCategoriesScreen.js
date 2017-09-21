@@ -3,11 +3,13 @@ import React from 'react'
 import {AppRegistry,View,FlatList,AsyncStorage,RefreshControl} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Body, Text,CheckBox,ListItem, List } from 'native-base';
 import {checkData} from '../../AllData'
+import {SkypeIndicator} from'react-native-indicators';
 import { connect } from 'react-redux'
 class AllCategoriesScreen extends React.Component {
     constructor(props){
         super(props);
         this.state={
+            isLoaded:false,
             data:[],
             myFavoriteData:[],
             userData:[],
@@ -27,29 +29,31 @@ class AllCategoriesScreen extends React.Component {
         this.getData();
     }
     render(){
-    return(
-        <Content style={{flex:1}}
-                 refreshControl={
-                     <RefreshControl
-                         refreshing={this.state.refreshing}
-                         onRefresh={this.getData}
-                     />
-                 }
-        >
-            <FlatList
-                data={this.props.state.allData.categories}
-                keyExtractor={(x,i)=>i}
-                renderItem={({ item }) => (
-                    <List>
-                        <ListItem>
-                            <Text>{item.name}</Text>
-                        </ListItem>
-                    </List>
-                )}
-            />
-        </Content>
-    )
-  }
+        return(
+            this.state.isLoaded ?(
+            <Content style={{flex:1}}
+                     refreshControl={
+                         <RefreshControl
+                             refreshing={this.state.refreshing}
+                             onRefresh={this.getData}
+                         />
+                     }
+            >
+                <FlatList
+                    data={this.props.state.allData.categories}
+                    keyExtractor={(x,i)=>i}
+                    renderItem={({ item }) => (
+                        <List>
+                            <ListItem>
+                                <Text>{item.name}</Text>
+                            </ListItem>
+                        </List>
+                    )}
+                />
+            </Content>
+        ):(<SkypeIndicator color='#4883da' />)
+        )
+      }
 }
 const mapStateToProps = (state) => {
     return {
