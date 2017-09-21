@@ -1,16 +1,16 @@
 'use strict'
 import React from 'react'
 import { StackNavigator  } from 'react-navigation'
-import RoutesTabsNavigation from './views/tabs/RoutesTabsNavigation'
+import {NavigatorTabs} from './views/tabs/navigationConfiguration'
 // Screens
 import OneRoute from './views/OneRoute'
 import Comments from './views/Comments'
 import {Icon} from 'native-base'
 const StackConfig ={
     TabNavigation: {
-        screen:RoutesTabsNavigation,
+        screen:NavigatorTabs,
         navigationOptions: ({navigation}) => ({
-            headerLeft: <Icon name="md-menu" style={{marginLeft:10}} onPress={()=>navigation.navigate('DrawerOpen')} />,
+            header:null
         })
     },
     AllOneRoute:{

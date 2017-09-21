@@ -1,21 +1,18 @@
 'use strict'
-
+import React from 'react'
 import { StackNavigator } from 'react-navigation'
 
-// Screens
 import Search from './Search'
 import OneRoute from '../2_routes/views/OneRoute'
+import {Icon} from 'native-base'
 const routeConfiguration = {
     Search: {
         screen: Search,
-        navigationOptions:({navigation})=>({
-            header :null
+        navigationOptions: ({navigation}) => ({
+            headerLeft: <Icon name="md-menu" style={{marginLeft:10}} onPress={()=>navigation.navigate('DrawerOpen')} />,
         })
     },
-    SearchOneRoute:{screen:OneRoute,
-        navigationOptions:({navigation})=>({
-            header :null
-        })},
+    SearchOneRoute:{screen:OneRoute},
 }
 
 export const SearchNavigator = StackNavigator(routeConfiguration)

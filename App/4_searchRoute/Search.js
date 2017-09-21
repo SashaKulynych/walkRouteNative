@@ -15,18 +15,9 @@ class Search extends React.Component {
 
         this.state = { isSearchActive: false, searchValue: '',refreshing:false };
     }
-    onSearchPressed = () => {
-        this.setState({ isSearchActive: true });
-    }
-    onSearchTextChanged = (searchValue) => {
-        this.setState({ searchValue });
-    }
-    onSearchClearPressed = () => {
-        this.onSearchTextChanged('');
-    }
-    onSearchClosed = () => {
-        this.setState({ isSearchActive: false, searchValue: '' });
-    }
+    static navigationOptions = {
+        title:'Search route',
+    };
     searchRoute(){
         if(this.state.searchValue!=''){
             return this.props.store.allData.routes.filter((value)=>{

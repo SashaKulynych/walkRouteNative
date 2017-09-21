@@ -1,6 +1,6 @@
 'use strict'
 
-import { TabNavigator } from 'react-navigation'
+import { TabNavigator,StackNavigator } from 'react-navigation'
 
 // Screens
 // import AllCategoriesScreen from './views/AllCategoriesScreen'
@@ -14,4 +14,12 @@ const routeConfiguration = {
 }
 // going to disable the header for now
 
-export const NavigatorCategories = TabNavigator(routeConfiguration)
+const NavigatorCategories = TabNavigator(routeConfiguration)
+export const CategoryNav = StackNavigator(
+    {
+        Categories: {screen:NavigatorCategories,
+            navigationOptions: ({navigation}) => ({
+                header:null
+            })}
+    }
+)

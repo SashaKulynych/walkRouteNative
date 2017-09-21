@@ -9,7 +9,6 @@ import {NavigationActions} from 'react-navigation'
 import { NavigatorFavorites } from './1_favorites/navigationConfiguration'
 import { NavigatorRoutes } from './2_routes/navigationConfiguration'
 import { NavigatorTabs } from './2_routes/views/tabs/navigationConfiguration'
-import { NavigatorCategories } from './3_categories/navigationConfiguration'
 import { SearchNavigator } from './4_searchRoute/navigationConfiguration'
 import {DrawerBar} from './0_drawerBar/navigationConfiguration'
 import {data,userData} from './AllData'
@@ -51,9 +50,7 @@ const store = createStore(
               return DrawerBar.router.getStateForAction(NavigationActions.navigate({ routeName: "RoutesNavigation" }), state)
           else return DrawerBar.router.getStateForAction(action, state)
       },
-      routesStack: (state, action) =>NavigatorRoutes.router.getStateForAction(action,state),
-      routesTabs:(state, action) => NavigatorTabs.router.getStateForAction(action,state),
-      categories: (state, action) => NavigatorCategories.router.getStateForAction(action,state),
+      routesStack: (state, action) =>NavigatorRoutes.router.getStateForAction(action,state)
   }),
   middleware()
 )
