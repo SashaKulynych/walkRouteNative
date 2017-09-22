@@ -1,8 +1,8 @@
 'use strict'
 import React from 'react'
-import { FlatList,RefreshControl } from 'react-native'
+import { FlatList,RefreshControl,View } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Body, Text,CheckBox,ListItem, List } from 'native-base';
-import {checkData} from '../../../AllData'
+import {checkData,checkDataExist} from '../../../AllData'
 import { connect } from 'react-redux'
 class MyRoutesScreen extends React.Component {
     constructor(props){
@@ -22,31 +22,34 @@ class MyRoutesScreen extends React.Component {
     }
     render(){
         return(
-            <Content style={{flex:1}}
-                     refreshControl={
-                         <RefreshControl
-                             refreshing={this.state.refreshing}
-                             onRefresh={this.getData}
-                         />
-                     }
-            >
-                <FlatList
-                    data={this.props.allData.routes.filter((value)=>{
-                        return value.userId == this.props.userData.id})}
-                    keyExtractor={(x,i)=>i}
-                    renderItem={({ item }) => (
-                        <List>
-                            <ListItem
-                                delayLongPress={1000}
-                                onPress={() => this.props.navigation.navigate('AllOneRoute',{data:item})
-                                }
-                            >
-                                <Text>{item.name}</Text>
-                            </ListItem>
-                        </List>
-                    )}
-                />
-            </Content>
+            <View style={{flex:1}}>
+                <Content style={{flex:1}}
+                         refreshControl={
+                             <RefreshControl
+                                 refreshing={this.state.refreshing}
+                                 onRefresh={this.getData}
+                             />
+                         }
+                >
+                    <FlatList
+                        data={this.props.allData.routes.filter((value)=>{
+                            return value.userId == this.props.userData.id})}
+                        keyExtractor={(x,i)=>i}
+                        renderItem={({ item }) => (
+                            <List>
+                                <ListItem
+                                    delayLongPress={1000}
+                                    onPress={() => this.props.navigation.navigate('AllOneRoute',{data:item})
+                                    }
+                                >
+                                    <Text>{item.name}</Text>
+                                </ListItem>
+                            </List>
+                        )}
+                    />
+                </Content>
+                {checkDataExist("routes",this.props.allData,this.props.userData)}
+            </View>
         )
     }
 }

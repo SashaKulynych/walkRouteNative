@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {AsyncStorage} from 'react-native'
 import { Container, Header, Content, Form, Item, Input, Label,Button,Text } from 'native-base'
+import store from '../../store'
 class Registration extends Component {
     static navigationOptions = {
         title:'Registration'
@@ -36,9 +38,14 @@ class Registration extends Component {
                             "email": this.state.email,
                             "password": this.state.password
                         })
-                    });
-                    alert("User add please log in!")
-                    this.props.navigation.navigate('Authorization')
+                    }).then(
+                        fetch('http://localhost:3000/users?email='+this.state.email).then((response) => response.json())
+                            .then((responseJson) => {
+                                    AsyncStorage.setItem('USER_SUCCESS', JSON.stringify(responseJson));
+                                    store.dispatch({type: 'USER_DATA', payload: responseJson[0]})
+                                    this.props.handleRoute("LogInSuccess");
+                            })
+                    );
                 }
                 else alert("E-mail exist!")
             }

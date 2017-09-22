@@ -4,86 +4,10 @@
       "email": "aaa@aaa.aa",
       "password": "aaa",
       "id": 1
-    },
-    {
-      "email": "111@111.11",
-      "password": "111",
-      "id": 2
     }
   ],
-  "categories": [
-    {
-      "name": "zfh",
-      "userId": 1,
-      "id": 1
-    },
-    {
-      "name": "fxvbh",
-      "userId": 1,
-      "id": 2
-    },
-    {
-      "name": "rxvb",
-      "userId": 2,
-      "id": 3
-    },
-    {
-      "name": "dfhh",
-      "userId": 2,
-      "id": 4
-    },
-    {
-      "name": "rxvb",
-      "userId": 1,
-      "id": 5
-    }
-  ],
-  "routes": [
-    {
-      "name": "fxxcg",
-      "description": "fcfgg",
-      "length": "8888",
-      "categoryId": 2,
-      "userId": 1,
-      "id": 1
-    },
-    {
-      "name": "fxcg",
-      "description": "xcvvvv",
-      "length": "1588",
-      "categoryId": 1,
-      "userId": 1,
-      "id": 2
-    },
-    {
-      "name": "cccg",
-      "description": "ccvg",
-      "length": "558",
-      "categoryId": 2,
-      "userId": 1,
-      "id": 3
-    }
-  ],
-  "comments": [
-    {
-      "description": "cool",
-      "rating": 2.5,
-      "userId": 1,
-      "routeId": 1,
-      "id": 1
-    }
-  ],
-  "favorites": [
-    {
-      "userId": 1,
-      "routeId": 2,
-      "id": 2
-    },
-    {
-      "rating": 2.5,
-      "userId": 1,
-      "routeId": 1,
-      "id": 3
-    }
-  ]
+  "categories": [],
+  "routes": [],
+  "comments": [],
+  "favorites": []
 }

@@ -7,7 +7,6 @@ import {SkypeIndicator} from'react-native-indicators';
 import { Easing } from 'react-native'
 import StarRating from 'react-native-star-rating';
 import { connect } from 'react-redux'
-import {Toolbar} from '../../Toolbar/toolbar'
 class OneRoute extends React.Component {
     constructor(){
         super();
@@ -32,7 +31,7 @@ class OneRoute extends React.Component {
     changeValue(){
         const {state} = this.props.navigation;
         let value = this.props.allData.favorites.filter((favorite) => {
-            return (favorite.userId == state.params.data.userId && favorite.routeId == state.params.data.id)
+            return (favorite.userId == this.props.userData.id && favorite.routeId == state.params.data.id)
         })
         if (value.length == 0){
             fetch('http://localhost:3000/favorites', {
@@ -43,7 +42,7 @@ class OneRoute extends React.Component {
                 },
                 body: JSON.stringify({
                     "rating":this.state.starCount,
-                    "userId":state.params.data.userId,
+                    "userId":this.props.userData.id,
                     "routeId":state.params.data.id
                 })
             }).then(()=>{
@@ -53,7 +52,7 @@ class OneRoute extends React.Component {
         }
         else{
             let url = 'http://localhost:3000/favorites/'+this.props.allData.favorites.filter((value)=>{
-                    return value.userId == state.params.data.userId && value.routeId==state.params.data.id})[0].id
+                    return value.userId == this.props.userData.id && value.routeId==state.params.data.id})[0].id
             fetch(url, {
                 method: 'DELETE',
                 headers: {
@@ -69,8 +68,9 @@ class OneRoute extends React.Component {
     checkFavorite() {
         const {state} = this.props.navigation;
         let value = this.props.allData.favorites.filter((favorite) => {
-            return (favorite.userId == state.params.data.userId && favorite.routeId == state.params.data.id)
+            return (favorite.userId == this.props.userData.id && favorite.routeId == state.params.data.id)
         })
+        console.log(value)
         if (value.length != 0) this.setState({
             checked:true
         })
@@ -87,7 +87,7 @@ class OneRoute extends React.Component {
             body: JSON.stringify({
                 "description":this.state.comment,
                 "rating":this.state.starCount,
-                "userId":state.params.data.userId,
+                "userId":this.props.userData.id,
                 "routeId":state.params.data.id
             })
         }).then(()=>{
@@ -100,7 +100,6 @@ class OneRoute extends React.Component {
         return(
             this.state.isLoaded ?(
             <Container>
-                {/*<Toolbar title={"Route "+ state.params.data.name} type="route" state={state}/>*/}
                 <Content>
                     <List>
                         <ListItem>
@@ -150,7 +149,7 @@ class OneRoute extends React.Component {
 const mapStateToProps = (state) => {
     return {
         allData: state.allData,
-        routesStack: state.routesStack
+        userData: state.userData
     }
 };
 export default connect(mapStateToProps)(OneRoute)

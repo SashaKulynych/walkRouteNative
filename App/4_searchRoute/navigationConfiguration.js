@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation'
 import Search from './Search'
 import OneRoute from '../2_routes/views/OneRoute'
 import {Icon} from 'native-base'
+
 const routeConfiguration = {
     Search: {
         screen: Search,

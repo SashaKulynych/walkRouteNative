@@ -1,18 +1,13 @@
 'use strict'
 // React
 import React from 'react'
-import {StyleSheet,View,Animated,FlatList,RefreshControl} from 'react-native'
+import {StyleSheet,View,Animated,FlatList,RefreshControl,StatusBar} from 'react-native'
 import {Content,List,ListItem,Text,Header,Item,Icon,Input,Button} from 'native-base'
-import LeftElement from './toolbarSettings/LeftElement';
-import CenterElement from './toolbarSettings/CenterElement';
-import RightElement from './toolbarSettings/RightElement';
 import { connect } from 'react-redux'
-import {styles} from './stylesToolbar'
 
 class Search extends React.Component {
     constructor(props, context) {
         super(props, context);
-
         this.state = { isSearchActive: false, searchValue: '',refreshing:false };
     }
     static navigationOptions = {
@@ -31,7 +26,7 @@ class Search extends React.Component {
     render(){
         return (
             <View style={{ flex:1 }}>
-                <Header searchBar rounded>
+                <Header style={{backgroundColor:"grey"}} searchBar rounded>
                     <Item>
                         <Icon name="ios-search" />
                         <Input placeholder="Search"
@@ -40,6 +35,10 @@ class Search extends React.Component {
                                onChangeText={(value)=>this.setState({searchValue:value})}/>
                     </Item>
                 </Header>
+                <StatusBar
+                    backgroundColor="black"
+                    barStyle="light-content"
+                />
                 <View style={{flex:1}}>
                     <Content style={{flex:1}}
                              refreshControl={

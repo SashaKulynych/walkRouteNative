@@ -1,8 +1,8 @@
 'use strict'
 import React from 'react'
-import {AppRegistry,View,FlatList,AsyncStorage,RefreshControl,Alert,TouchableWithoutFeedback  } from 'react-native';
+import {AppRegistry,View,FlatList,AsyncStorage,RefreshControl,Alert,TouchableWithoutFeedback,ScrollView  } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Body, Text,CheckBox,ListItem, List,Button } from 'native-base';
-import {checkData} from '../../AllData'
+import {checkData,checkDataExist} from '../../AllData'
 import { connect } from 'react-redux'
 class MyCategoriesScreen extends React.Component {
     constructor(props){
@@ -34,6 +34,7 @@ class MyCategoriesScreen extends React.Component {
     }
     render(){
         return(
+            <View style={{flex:1}}>
             <Content  style={{flex:1}}
                      refreshControl={
                          <RefreshControl
@@ -66,7 +67,9 @@ class MyCategoriesScreen extends React.Component {
                         </TouchableWithoutFeedback>
                     )}
                 />
-            </Content >
+            </Content>
+                {checkDataExist("categories",this.props.allData,this.props.userData)}
+            </View>
         )
     }
 }

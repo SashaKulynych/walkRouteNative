@@ -33,7 +33,7 @@ class AddRouteScreen extends React.Component {
                     "categoryId":this.state.routeCategory,
                     "userId": this.props.userData.id
                 })
-            });
+            }).then(alert("Route Add!"));
             checkData();
         }
         else alert("Select Category!")
@@ -55,7 +55,7 @@ class AddRouteScreen extends React.Component {
                 <Picker
                     selectedValue={this.state.routeCategory}
                     onValueChange={(itemValue, itemIndex) => this.setState({routeCategory: itemValue})}>
-                    <Picker.Item label="Category" value="" />
+                    <Picker.Item label="Category" value=""  />
                     {this.categoryPicker()}
                 </Picker>
                 <Form>

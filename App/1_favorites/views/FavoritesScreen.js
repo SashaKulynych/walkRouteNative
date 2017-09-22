@@ -1,11 +1,10 @@
 'use strict'
 import React from 'react'
-import { FlatList,RefreshControl,View } from 'react-native'
+import { FlatList,RefreshControl,View,StatusBar } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Body, Text,CheckBox,ListItem, List,Icon } from 'native-base';
 import {checkData} from '../../AllData'
-import {Toolbar} from '../../Toolbar/toolbar'
 import { connect } from 'react-redux'
-import store from '../../store'
+
 class FavoritesScreen extends React.Component {
     constructor(props){
         super(props);
@@ -27,33 +26,42 @@ class FavoritesScreen extends React.Component {
     render(){
         return(
             <View style={{flex:1}}>
-                {/*<Toolbar title="Favorite" type="draw"/>*/}
-                <Content
-                     refreshControl={
-                         <RefreshControl
-                             refreshing={this.state.refreshing}
-                             onRefresh={()=>this.getData()}
-                         />
-                     }
-                >
-                    <FlatList
-                        data={this.props.allData.favorites}
-                        keyExtractor={(x,i)=>i}
-                        renderItem={({ item }) => (
-                            <List>
-                                <ListItem
-                                    delayLongPress={1000}
-                                    onPress={() => this.props.navigation.navigate('OneFavoriteRoute',{data:this.props.allData.routes.filter((value)=>{
-                                        return value.id == item.routeId})[0]})
-                                    }
-                                >
-                                    <Text>Name: {this.props.allData.routes.filter((value)=>{
-                                        return value.id == item.routeId})[0].name}</Text>
-                                </ListItem>
-                            </List>
-                        )}
-                    />
-                </Content>
+                <StatusBar
+                    backgroundColor="black"
+                    barStyle="light-content"
+                />
+                    <Content style={{flex:1}}
+                         refreshControl={
+                             <RefreshControl
+                                 refreshing={this.state.refreshing}
+                                 onRefresh={()=>this.getData()}
+                             />
+                         }
+                    >
+                        <FlatList
+                            data={this.props.allData.favorites.filter((value)=>{
+                                return value.userId == this.props.userData.id})}
+                            keyExtractor={(x,i)=>i}
+                            renderItem={({ item }) => (
+                                <List>
+                                    <ListItem
+                                        delayLongPress={1000}
+                                        onPress={() => this.props.navigation.navigate('OneFavoriteRoute',{data:this.props.allData.routes.filter((value)=>{
+                                            return value.id == item.routeId})[0]})
+                                        }
+                                    >
+                                        <Text>Name: {this.props.allData.routes.filter((value)=>{
+                                            return value.id == item.routeId})[0].name}</Text>
+                                    </ListItem>
+                                </List>
+                            )}
+                        />
+                    </Content>
+                {this.props.allData.favorites.filter((value)=>{
+                    return value.userId == this.props.userData.id}).length==0?
+                    <View style={{flex:1, flexDirection: 'column',alignItems:"center"}}>
+                        <Text style={{color:"grey",fontSize:18}}>You have not favorite routes</Text>
+                    </View>:null}
             </View>
         )
     }
